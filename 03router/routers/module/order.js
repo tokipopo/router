@@ -151,6 +151,35 @@ Router.put('/edit/:id',async(req,res) => {
 
 // 查询订单列表(购物车多商铺数据查询)
 
+Router.get('/getlist',async(req,res) =>{
+    let inf ={}
+    try{
+        let {shop} = req.query;
+        let sql = `SELECT * FROM cart WHERE shop=${shop}`;
+        let data =await query(sql);
+        if(data.length){
+            inf = {
+                code:2000,
+                flag:true,
+                message:'select success',
+                data
+            }
+        }else{
+            inf = {
+                code:3000,
+                flag:false,
+                message:'select failure'
+            }
+        }
+    }catch(err){
+        inf = {
+            code:5000,
+            flag:false,
+            message:'select failure'
+        }
+    }
+    res.send(inf);
+});
 
 
 
@@ -164,7 +193,7 @@ Router.get('/getcart/:id',async(req,res) =>{
     let inf ={}
     let {id} = req.params;
     try{
-        let sql = `SELECT * FROM user WHERE cart_id=${id}`;
+        let sql = `SELECT * FROM cart WHERE cart_id=${id}`;
         let data =await query(sql);
         if(data.length){
             inf = {
