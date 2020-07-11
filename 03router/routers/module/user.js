@@ -225,14 +225,14 @@ Router.get('/getuser/:id',async(req,res) =>{
 Router.put('/edit/:id',async(req,res) => {
     let{id}=req.params;
     let opt = req.body;  // let name = req.query.name;
-    console.log(opt)
+    // console.log(opt)
     let str ='';
     let inf={};
     for(let key in opt){
         str += key + '=' + `'${opt[key]}'` + ','
     }
     str = str.slice(0,-1);
-    console.log(str)
+    // console.log(str)
     try{
         let sql = `UPDATE user SET ${str} WHERE id=${id}`;
         let data = await query(sql);

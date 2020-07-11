@@ -155,7 +155,7 @@ Router.get('/getlist',async(req,res) =>{
     let inf ={}
     try{
         let {shop} = req.query;
-        let sql = `SELECT * FROM cart WHERE shop=${shop}`;
+        let sql = `SELECT * FROM cart WHERE shop='${shop}'`;
         let data =await query(sql);
         if(data.length){
             inf = {
