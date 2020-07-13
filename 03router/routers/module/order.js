@@ -49,7 +49,7 @@ Router.delete('/del/:id',async(req,res)=>{
     let {id} = req.params;
     let inf={};
     try{
-        let sql = `DELETE FROM cart WHERE good_id=${id}`;
+        let sql = `DELETE FROM cart WHERE cart_id=${id}`;
         let data = await query(sql);
         if (data.affectedRows) {
             inf = {
@@ -81,7 +81,7 @@ Router.delete('/delmore',async(req,res) =>{
     let {ids} = req.body;
     let inf = {};
     try {
-        let sql = `DELETE FROM cart WHERE good_id in(${ids})`;
+        let sql = `DELETE FROM cart WHERE cart_id in(${ids})`;
         let data = await query(sql);
         if (data.affectedRows) {
             inf = {
@@ -123,7 +123,7 @@ Router.put('/edit/:id',async(req,res) => {
     str = str.slice(0,-1);
     console.log(str)
     try{
-        let sql = `UPDATE user SET ${str} WHERE cart_id=${id}`;
+        let sql = `UPDATE cart SET ${str} WHERE cart_id=${id}`;
         let data = await query(sql);
         console.log(data);
         if(data.affectedRows){

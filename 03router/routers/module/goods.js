@@ -9,12 +9,20 @@ let tokenFn = require('./token');
 //写接口 
 // 商品信息列表：分页
 Router.get('/goodlist',async(req,res) =>{
-    let { page, pagesize } = req.query;
+    let { page, pagesize,sort} = req.query;
     let index = (page - 1) * pagesize;
     console.log(index)
     let inf ={};
+    let sql;
     try{
-        let sql = `SELECT * FROM goods LIMIT ${index},${pagesize}`;
+        if(sort == "price_asc"){
+            sql = `SELECT * FROM goods Order BY price ASC LIMIT ${index},${pagesize}`
+        }else if($sort == "price_desc"){
+            sql = `SELECT * FROM goods Order BY price DESC LIMIT ${index},${pagesize}`
+        }else if(sort == "default"){
+            sql = `SELECT * FROM goods Order BY good_id LIMIT ${index},${pagesize}`
+        }
+        
         let data = await query(sql);
         // console.log(sql)
         let sql2 = `SELECT * FROM goods`;
